@@ -4,7 +4,7 @@ import { defineComponent, h } from 'vue'
 const navigation = [
     {
         name: 'GitHub',
-        href: '#',
+        href: 'https://github.com/canyouhearthemusic',
         icon: defineComponent({
             render: () =>
                 h('svg', { fill: 'currentColor', viewBox: '0 0 24 24' }, [
@@ -29,7 +29,7 @@ const navigation = [
                 </a>
             </div>
             <div class="mt-8 md:order-1 md:mt-0">
-                <p class="text-center text-xs leading-5 text-gray-500">Made by Alibek Tastan for educational purposes.</p>
+                <p class="text-center text-xs leading-5 text-gray-500">&copy; Made by Alibek Tastan for educational purposes.</p>
             </div>
         </div>
     </footer>
