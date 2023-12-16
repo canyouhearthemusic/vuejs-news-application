@@ -28,14 +28,17 @@ const slug = ref(useSlug(props.post.title));
                 <svg viewBox="0 0 2 2" class="-ml-0.5 h-0.5 w-0.5 flex-none fill-white/50">
                     <circle cx="1" cy="1" r="1"/>
                 </svg>
-                <div class="flex gap-x-2.5">
-                    <!--                    <img :src="post.author" alt="" class="h-6 w-6 flex-none rounded-full bg-white/10"/>-->
-                    {{ post.author }}
-                </div>
+                {{ post.author }}
             </div>
         </div>
         <h3 class="mt-3 text-lg font-semibold leading-6 text-white">
-            <RouterLink :to="{name: 'news', params: { slug }}">
+            <RouterLink :to="{
+                name: 'news',
+                params: {
+                    slug,
+                    post
+                }
+            }">
                 <span class="absolute inset-0"/>
                 {{ post.title }}
             </RouterLink>

@@ -4,7 +4,7 @@ export default function useSlug(word) {
     word = word.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
     word = word.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
     word = word.replace(/đ/gi, 'd');
-    word = word.replace(/[-.:%'",\s]+/g, ' ');
+    word = word.replace(/[-.:%$'",\s]+/g, ' ');
     word = word.replace(/\s*$/g, '');
     word = word.replace(/\s+/g, '-');
 
