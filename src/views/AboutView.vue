@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import Table from "@/components/Table.vue";
 
 const stats = [
     { label: 'Vue.js', value: 'vuejslogo.png' },
@@ -61,6 +62,7 @@ const mobileMenuOpen = ref(false)
                             <img :src="`../../public/${stat.value}`" alt="" style="width: 75px; height: 75px">
                         </div>
                     </dl>
+                    <Table />
                 </div>
             </div>
         </main>

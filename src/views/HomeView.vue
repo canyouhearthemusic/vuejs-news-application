@@ -7,8 +7,10 @@ import InputCountry from "@/components/Inputs/InputCountry.vue";
 import InputCategory from "@/components/Inputs/InputCategory.vue";
 import { debounce } from "lodash";
 import { onBeforeMount, reactive, ref, watch } from "vue";
+import { useFlash } from "@/composables/useFlash.js";
 
 let apiStore = useApiStore();
+let { flash } = useFlash();
 
 const posts = ref([]);
 const loading = ref(true);
@@ -18,13 +20,7 @@ const form = reactive({
     search: '',
 });
 
-onBeforeMount( async () => {
-    const { data } = await useFetch(apiStore.topHeadlines);
-
-    posts.value = JSON.parse(data.value);
-
-    loading.value = false;
-});
+onBeforeMount(initialRequest);
 
 watch(form, debounce(refetchData, 500));
 
@@ -37,13 +33,39 @@ async function refetchData(newValues) {
 
     loading.value = true;
 
-    let { data } = (apiStore.categoryValue === "" && apiStore.countryValue === "")
+    let { data, onFetchError } = (apiStore.categoryValue === "" && apiStore.countryValue === "")
         ? await useFetch(apiStore.everything)
         : await useFetch(apiStore.topHeadlines);
+
+    onFetchError(() => {
+        flash(
+            "Error detected",
+            "Something went wrong.",
+            "error",
+            "<p class='text-sm'>Make sure you are connected to the network.</p>"
+        );
+    })
 
     posts.value = JSON.parse(data.value);
 
     loading.value = false;
+}
+
+async function initialRequest() {
+    let { data, error, isFetching } = await useFetch(apiStore.topHeadlines);
+
+    loading.value = isFetching.value;
+
+    if(String(error.value).toLowerCase().includes("fail" || "error")) {
+        flash(
+            error.value,
+            "Something went wrong.",
+            "error",
+            "<p class='text-sm'>Make sure you are connected to the network.</p>"
+        );
+    }
+
+    posts.value = JSON.parse(data.value);
 }
 </script>
 

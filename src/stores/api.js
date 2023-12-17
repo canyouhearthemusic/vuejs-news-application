@@ -2,7 +2,6 @@ import { computed } from "vue";
 import { defineStore } from "pinia";
 
 export const useApiStore = defineStore('api', {
-    // State
     state: () => ({
         apiUrl: "https://newsapi.org/v2",
         apiKey: import.meta.env.VITE_NEWS_API,
@@ -22,7 +21,7 @@ export const useApiStore = defineStore('api', {
 
     actions: {
         setData(newRequisites) {
-            let { country, category, search } = JSON.parse(JSON.stringify(newRequisites));
+            let { country, category, search } = { ...newRequisites };
             this.countryValue = country.trim();
             this.categoryValue = category.trim();
             this.searchValue = search.trim();
