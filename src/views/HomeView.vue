@@ -3,22 +3,48 @@ import InputSearch from "@/components/Inputs/InputSearch.vue";
 import NewsCard from "@/components/News/NewsCard.vue";
 import { useFetch } from '@vueuse/core'
 import { useApiStore } from "@/stores/api.js";
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, reactive, ref, watch } from "vue";
 import InputCountry from "@/components/Inputs/InputCountry.vue";
 import InputCategory from "@/components/Inputs/InputCategory.vue";
+import { debounce } from "lodash";
 
-let { everything, topHeadlines, topHeadlinesWithSources } = useApiStore();
+let apiStore = useApiStore();
 
 const posts = ref([]);
 const loading = ref(true);
+const form = reactive({
+    country: '',
+    category: '',
+    search: '',
+});
 
 onBeforeMount(async () => {
-    const { data } = await useFetch(topHeadlines);
+    const { data } = await useFetch(apiStore.topHeadlines);
 
     posts.value = JSON.parse(data.value);
 
     loading.value = false;
 });
+
+watch(form, debounce(refetchData, 500));
+
+async function refetchData(newValues) {
+    apiStore.setData(newValues);
+
+    posts.value = [];
+
+    if(apiStore.categoryValue === "" && apiStore.countryValue === "" && apiStore.searchValue === "") return
+
+    loading.value = true;
+
+    let { data } = (apiStore.categoryValue === "" && apiStore.countryValue === "")
+        ? await useFetch(apiStore.everything)
+        : await useFetch(apiStore.topHeadlines);
+
+    posts.value = JSON.parse(data.value);
+
+    loading.value = false;
+}
 </script>
 
 <template>
@@ -27,12 +53,12 @@ onBeforeMount(async () => {
             <h2 class="capitalize text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">The latest big news</h2>
             <p class="mt-2 text-lg leading-8 text-gray-600">Just type in the text-field below.</p>
             <div class="mt-6 flex justify-center gap-x-5">
-                <InputCountry class="w-52 sm:w-full md:w-52"/>
-                <InputCategory class="w-52 sm:w-full md:w-52"/>
+                <InputCountry @update:country="newValue => form.country = newValue" class="w-52 sm:w-full md:w-52"/>
+                <InputCategory @update:category="newValue => form.category = newValue" class="w-52 sm:w-full md:w-52"/>
             </div>
             <div class="flex justify-center">
                 <div class="relative mt-6 flex items-center w-96">
-                    <InputSearch/>
+                    <InputSearch v-model:search="form.search"/>
                 </div>
             </div>
         </div>
@@ -42,7 +68,8 @@ onBeforeMount(async () => {
         <Spinner color="black"/>
     </div>
 
-    <div v-else class="mx-auto mt-14 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-14 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+    <div v-else
+         class="mx-auto mt-14 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-14 lg:mx-0 lg:max-w-none lg:grid-cols-3">
         <NewsCard v-for="post in posts.articles" :key="post.id" :post="post"/>
     </div>
 </template>

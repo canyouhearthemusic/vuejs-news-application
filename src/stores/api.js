@@ -1,23 +1,31 @@
 import { computed } from "vue";
 import { defineStore } from "pinia";
 
-export const useApiStore = defineStore('api', () => {
-    // state
-    const apiUrl = "https://newsapi.org/v2";
-    const apiKey = "8e12b81cebfa41bfb34ed2f427d2de52";
+export const useApiStore = defineStore('api', {
+    // State
+    state: () => ({
+        apiUrl: "https://newsapi.org/v2",
+        apiKey: import.meta.env.VITE_NEWS_API,
+        countryValue: "us",
+        categoryValue: "",
+        searchValue: "",
+    }),
 
-    // getters or computed properties
-    const everything = computed(() => {
-        return `${apiUrl}/everything?country=us&apiKey=${apiKey}`
-    });
+    getters: {
+        everything: (state) => {
+            return `${state.apiUrl}/everything?q=${state.searchValue}&apiKey=${state.apiKey}`;
+        },
+        topHeadlines: (state) => {
+            return `${state.apiUrl}/top-headlines?country=${state.countryValue}&q=${state.searchValue}&category=${state.categoryValue}&apiKey=${state.apiKey}`;
+        }
+    },
 
-    const topHeadlines = computed(() => {
-        return `${apiUrl}/top-headlines?country=us&apiKey=${apiKey}`
-    });
-
-    const topHeadlinesWithSources = computed(() => {
-        return `${apiUrl}/top-headlines/sources?country=us&apiKey=${apiKey}`
-    });
-
-    return { everything, topHeadlines, topHeadlinesWithSources };
+    actions: {
+        setData(newRequisites) {
+            let { country, category, search } = JSON.parse(JSON.stringify(newRequisites));
+            this.countryValue = country.trim();
+            this.categoryValue = category.trim();
+            this.searchValue = search.trim();
+        }
+    }
 })
