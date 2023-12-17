@@ -20,7 +20,7 @@ const navigation = [
 </script>
 
 <template>
-    <footer class="mt-auto">
+    <footer class="mt-auto max-h-fit">
         <div class="mx-auto max-w-7xl px-6 py-4 md:flex md:items-center md:justify-between lg:px-8">
             <div class="flex justify-center space-x-6 md:order-2">
                 <a v-for="item in navigation" :key="item.name" :href="item.href" class="text-gray-400 hover:text-gray-500">

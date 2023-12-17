@@ -32,13 +32,15 @@ const slug = ref(useSlug(props.post.title));
             </div>
         </div>
         <h3 class="mt-3 text-lg font-semibold leading-6 text-white">
-            <RouterLink :to="{
-                name: 'news',
-                params: {
-                    slug,
-                    post
-                }
-            }">
+            <RouterLink
+                :to="{
+                    name: 'news',
+                    params: {
+                        slug,
+                        post: JSON.stringify(post)
+                    }
+                }"
+            >
                 <span class="absolute inset-0"/>
                 {{ post.title }}
             </RouterLink>

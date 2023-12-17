@@ -1,16 +1,25 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
 import Navbar from "@/shared/Navbar/Navbar.vue";
 import Footer from "@/shared/Footer/Footer.vue";
+import { computed } from "vue";
+
+const route = useRoute();
+const isNewsView = computed(() => route.name === 'news');
 </script>
 
 <template>
     <Navbar/>
-    <main class="w-full mx-auto max-w-7xl sm:px-6 lg:px-8 flex-1 pt-12">
+    <main class="w-full mx-auto grow">
         <RouterView v-slot="{Component}">
-            <KeepAlive>
+            <template v-if="!isNewsView">
+                <KeepAlive>
+                    <Component :is="Component"/>
+                </KeepAlive>
+            </template>
+            <template v-else>
                 <Component :is="Component"/>
-            </KeepAlive>
+            </template>
         </RouterView>
     </main>
     <Footer/>
