@@ -26,7 +26,7 @@ const mobileMenuOpen = ref(false)
             <!-- Header section -->
             <div class="px-6 lg:px-8">
                 <div class="mx-auto max-w-2xl pt-20 text-center sm:pt-20">
-                    <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl capitalize">About this
+                    <h2 class="text-4xl font-bold tracking-wide text-white sm:text-6xl capitalize">About this
                         project</h2>
                 </div>
             </div>

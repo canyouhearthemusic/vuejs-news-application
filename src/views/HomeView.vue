@@ -84,7 +84,7 @@ async function initialRequest() {
                 </div>
             </div>
         </div>
-
+        
         <div v-if="loading" class="mt-40 flex justify-center w-full">
             <Spinner color="black"/>
         </div>
@@ -94,6 +94,4 @@ async function initialRequest() {
             <NewsCard v-for="post in posts.articles" :key="post.id" :post="post"/>
         </div>
     </Layout>
-
-
 </template>

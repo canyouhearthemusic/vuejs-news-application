@@ -57,10 +57,10 @@ onDeactivated(() => {
                                 </p>
                             </div>
                         </div>
-                        <div class="mt-10 flex">
-                            <a :href="post.url" class="text-base font-semibold leading-7 text-indigo-600">Learn more
-                                from original source <span aria-hidden="true">&rarr;</span></a>
-                        </div>
+                        <br><hr><br>
+                        <a :href="post.url" class="text-base font-semibold leading-7 text-indigo-600">
+                            Learn more from original source <span aria-hidden="true">&rarr;</span>
+                        </a>
                     </div>
                 </div>
             </div>

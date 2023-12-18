@@ -3,8 +3,7 @@ const socials = [
     { name: 'Telegram', profile: '@al1bekkkk' },
     { name: 'GitHub', profile: '@canyouhearthemusic' },
     { name: 'Mail', profile: 'alibektastan04@gmail.com' },
-    // More people...
-]
+];
 </script>
 
 <template>
@@ -23,7 +22,7 @@ const socials = [
                                 Name
                             </th>
                             <th scope="col" class="px-3 py-3.5 text-left text-lg font-semibold text-white">
-                                Title
+                                Account
                             </th>
                         </tr>
                         </thead>
