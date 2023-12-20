@@ -1,14 +1,16 @@
 <script setup>
 import { useRoute } from "vue-router";
-import { onDeactivated, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import Layout from "@/shared/Layout.vue";
+import router from "@/router/index.js";
 
 let route = useRoute();
-let post = ref({});
-post.value = JSON.parse(route.params.post);
+let post = JSON.parse(route.params.post);
 
-onDeactivated(() => {
-    post.value = {};
+post.content = post.content.slice(0, post.content.indexOf(' ['));
+
+onUnmounted(() => {
+    post = {};
 });
 
 </script>
@@ -39,7 +41,7 @@ onDeactivated(() => {
                                 </blockquote>
                                 <figcaption class="mt-6 text-sm leading-6 text-gray-300"><strong
                                     class="font-semibold text-white">{{ post.author }} • </strong>
-                                    <i>Source by: {{ post.source.name }}</i></figcaption>
+                                    <i>Source: {{ post.source.name }}</i></figcaption>
                             </figure>
                         </div>
                     </div>
@@ -57,8 +59,10 @@ onDeactivated(() => {
                                 </p>
                             </div>
                         </div>
-                        <br><hr><br>
-                        <a :href="post.url" class="text-base font-semibold leading-7 text-indigo-600">
+                        <br>
+                        <hr>
+                        <br>
+                        <a :href="post.url" class="text-base font-semibold tracking-wide text-white border rounded-lg bg-indigo-600 px-6 py-2">
                             Learn more from original source <span aria-hidden="true">&rarr;</span>
                         </a>
                     </div>

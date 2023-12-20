@@ -26,7 +26,7 @@ const mobileMenuOpen = ref(false)
             <!-- Header section -->
             <div class="px-6 lg:px-8">
                 <div class="mx-auto max-w-2xl pt-20 text-center sm:pt-20">
-                    <h2 class="text-4xl font-bold tracking-wide text-white sm:text-6xl capitalize">About this
+                    <h2 class="text-4xl font-semibold tracking-wide text-white sm:text-6xl capitalize">About this
                         project</h2>
                 </div>
             </div>
@@ -58,7 +58,7 @@ const mobileMenuOpen = ref(false)
                     </div>
                     <dl class="mt-16 flex justify-center gap-x-8 sm:mt-20 sm:grid-cols-2 sm:gap-y-16 lg:mt-28 lg:grid-cols-4">
                         <div v-for="(stat, statIdx) in stats" :key="statIdx"
-                             class="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
+                             class="flex flex-col-reverse border-white/20 pl-6">
                             <img :src="`../../public/${stat.value}`" alt="" style="width: 75px; height: 75px">
                         </div>
                     </dl>

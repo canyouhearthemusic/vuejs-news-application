@@ -1,5 +1,5 @@
 import '../src/style.css'
-import ClipLoader from "vue-spinner/src/ClipLoader.vue"
+import ScaleLoader from "vue-spinner/src/ScaleLoader.vue"
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -10,7 +10,7 @@ import Layout from "@/shared/Layout.vue";
 
 const app = createApp(App)
 
-app.component('Spinner', ClipLoader)
+app.component('Loading', ScaleLoader)
 app.component('Layout', Layout)
 app.use(createPinia())
 app.use(router)

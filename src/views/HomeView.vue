@@ -61,7 +61,7 @@ async function initialRequest() {
             error.value,
             "Something went wrong.",
             "error",
-            "<p class='text-sm'>Make sure you are connected to the network.</p>"
+            "<p class='text-sm'>Make sure that you are connected to the network.</p>"
         );
     }
 
@@ -72,7 +72,7 @@ async function initialRequest() {
 <template>
     <Layout>
         <div class="mx-auto max-w-2xl text-center">
-            <h2 class="capitalize text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">The latest big news</h2>
+            <h2 class="capitalize text-3xl font-bold tracking-normal text-gray-900 sm:text-4xl">The latest big news</h2>
             <p class="mt-2 text-lg leading-8 text-gray-600">Just type in the text-field below.</p>
             <div class="mt-6 flex justify-center gap-x-5">
                 <InputCountry @update:country="newValue => form.country = newValue" class="w-52 sm:w-full md:w-52"/>
@@ -84,9 +84,9 @@ async function initialRequest() {
                 </div>
             </div>
         </div>
-        
+
         <div v-if="loading" class="mt-40 flex justify-center w-full">
-            <Spinner color="black"/>
+            <Loading color="black"/>
         </div>
 
         <div v-else
