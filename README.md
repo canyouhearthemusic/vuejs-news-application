@@ -8,3 +8,13 @@
 
 ## Demo
 https://youtu.be/3llsqM70OHU
+
+## Getting Started
+Run these commands to launch my project.
+
+```
+mkdir news-app && cd news-app
+git clone https://github.com/canyouhearthemusic/vuejs-news-application.git
+npm install
+npm run dev
+```
