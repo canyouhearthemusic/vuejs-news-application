@@ -62,8 +62,10 @@ onUnmounted(() => {
                         <br>
                         <hr>
                         <br>
-                        <a :href="post.url" class="text-base font-semibold tracking-wide text-white border rounded-lg bg-indigo-600 px-6 py-2">
-                            Learn more from original source <span aria-hidden="true">&rarr;</span>
+                        <a :href="post.url">
+                            <button class="text-base font-semibold tracking-wide text-white border rounded-lg bg-indigo-600 px-6 py-2 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+                                Learn more from original source <span aria-hidden="true">&rarr;</span>
+                            </button>
                         </a>
                     </div>
                 </div>
